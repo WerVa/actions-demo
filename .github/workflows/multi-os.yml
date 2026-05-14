@@ -1,0 +1,47 @@
+name: Multi-OS Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    env:
+      OS_TYPE: "Linux"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Show OS info (Ubuntu)
+        run: |
+          echo "Running on $OS_TYPE"
+          uname -a
+          echo "Environment variable: $OS_TYPE"
+          
+  windows-job:
+    runs-on: windows-latest
+    env:
+      OS_TYPE: "Windows"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Show OS info (Windows)
+        run: |
+          echo "Running on $env:OS_TYPE"
+          systeminfo | findstr /C:"OS"
+          echo "Environment variable: $env:OS_TYPE"
+          
+  macos-job:
+    runs-on: macos-latest
+    env:
+      OS_TYPE: "macOS"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Show OS info (macOS)
+        run: |
+          echo "Running on $OS_TYPE"
+          uname -a
+          echo "Environment variable: $OS_TYPE"
